@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title>Amadon</title>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col lg-6">
+                <h1 class="text-center">Amadon Store!</h1>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th class="fs-3">Item</th>
+                            <th class="fs-3">Price</th>
+                            <th class="fs-3">Quantity</th>
+                            <th class="fs-3">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-secondary">
+                        {% for product in all_products %}
+                        <tr>
+                            <form action="/checkout" method="post">
+                                {% csrf_token %}
+                                <td>{{product.description}}</td>
+                                <td><input type="hidden" name="price" value="{{product.price}}">{{product.price}}</td>
+                                <td><select name="quantity" class="form-select">
+                                    <option value="1">1</option>              
+                                    <option value="2">2</option>              
+                                    <option value="3">3</option>              
+                                </select></td>
+                                <td><input type="submit" value="Buy!" class="btn btn-secondary"></td>
+                            </form>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+</body>
+</html>
